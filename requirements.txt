@@ -1,0 +1,9 @@
+fastapi
+uvicorn
+sqlalchemy
+aiosqlite
+alembic
+loguru
+pyjwt
+python-multipart
+pwdlib[argon2]
