@@ -10,8 +10,8 @@ class Product(Base):
 
     id = Column(Integer, primary_key=True)
     name = Column(String(128), nullable=False)
-    price = Column(Float, default=0.0, nullable=False)
-    in_stock = Column(Boolean, default=True, nullable=False)
+    price = Column(Float, default=0.0)
+    in_stock = Column(Boolean, default=True)
 
 
 class ProductBase(BaseModel):

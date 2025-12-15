@@ -7,7 +7,6 @@ from app.core.security import ACCESS_TOKEN_EXPIRE_MINUTES, create_access_token
 from app.api.deps import SessionDep
 from app.models.token import Token
 from app.repositories.users import authenticate
-import app.core.logging
 
 from loguru import logger
 
@@ -25,6 +24,6 @@ async def get_access_token(session: SessionDep, form_data: OAuth2PasswordRequest
         logger.warning(f"Неактивный пользователь пытался войти в систему: {form_data.username}")
         raise HTTPException(status_code=400, detail="User is not active")
     access_token_expires = timedelta(minutes=ACCESS_TOKEN_EXPIRE_MINUTES)
-    access_token = create_access_token(data={ "sub": user.username }, expires_delta=access_token_expires)
+    access_token = create_access_token(data={ "username": user.username }, expires_delta=access_token_expires)
     logger.info(f"Пользователь успешно вошел в систему: {user.username}")
     return Token(access_token=access_token, token_type="bearer")

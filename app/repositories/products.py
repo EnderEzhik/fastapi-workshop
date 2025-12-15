@@ -18,7 +18,6 @@ async def update_product(session: AsyncSession,
     product_data = product_update.model_dump(exclude_unset=True)
     for field, value in product_data.items():
         setattr(product_db, field, value)
-
     await session.commit()
     return
 

@@ -39,7 +39,7 @@ async def get_current_user(session: SessionDep, token: str = Depends(oauth2_sche
                              key=SECRET_KEY,
                              algorithms=[ALGORITHM])
         token_data = TokenData(**payload)
-        if not token_data["sub"]:
+        if not token_data.username:
             raise credentials_exception
     except (InvalidTokenError, ValidationError):
         raise credentials_exception

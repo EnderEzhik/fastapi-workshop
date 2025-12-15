@@ -5,7 +5,7 @@ from app.models.user import UserCreate, UserRegister, UserUpdate, UserOut
 import app.repositories.users as user_repo
 
 
-router = APIRouter(prefix="/users")
+router = APIRouter(prefix="/users", tags=["Users"])
 
 
 @router.get("/me", response_model=UserOut)
@@ -14,7 +14,7 @@ async def get_me(current_user: CurrentUserDep):
 
 
 @router.get("/{username}", response_model=UserOut)
-async def get_user(session: SessionDep, username: str, current_user: CurrentUserDep):
+async def get_user(session: SessionDep, current_user: CurrentUserDep, username: str):
     user = await user_repo.get_user_by_username(session, username)
     if not user:
         raise HTTPException(status_code=404, detail="User not found")
