@@ -39,12 +39,6 @@ async def register_user(session: SessionDep, user_register: UserRegister):
     return new_user
 
 
-@router.post("/", response_model=UserOut)
-async def create_user(session: SessionDep, user_create: UserCreate):
-    new_user = await user_repo.create_user(session, user_create)
-    return new_user
-
-
 @router.patch("/{user_id}", response_model=UserOut)
 async def update_user(session: SessionDep, current_user: CurrentUserDep, user_id: int, user_update: UserUpdate):
     user_db = await user_repo.get_user_by_id(session, user_id)

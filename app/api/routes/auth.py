@@ -14,7 +14,7 @@ from loguru import logger
 router = APIRouter(prefix="/auth", tags=["Auth"])
 
 
-@router.post("/login/access-token", response_model=Token)
+@router.post("/access-token", response_model=Token)
 async def get_access_token(session: SessionDep, form_data: OAuth2PasswordRequestForm = Depends()):
     user = await authenticate(session, form_data.username, form_data.password)
     if not user:

@@ -5,10 +5,9 @@ from app.core.security import get_password_hash, verify_password
 from app.models.user import User, UserCreate, UserUpdate
 
 
-async def get_users(session: AsyncSession, offset: int = 0, limit: int = 100) -> list[User]:
-    query = select(User).offset(offset).limit(limit)
-    result = await session.execute(query)
-    return list(result.scalars().all())
+async def get_user_by_id(session: AsyncSession, user_id: int) -> User | None:
+    user = await session.get(User, user_id)
+    return user
 
 
 async def get_user_by_username(session: AsyncSession, username: str) -> User | None:
@@ -18,9 +17,10 @@ async def get_user_by_username(session: AsyncSession, username: str) -> User | N
     return user
 
 
-async def get_user_by_id(session: AsyncSession, user_id: int) -> User | None:
-    user = await session.get(User, user_id)
-    return user
+async def get_users(session: AsyncSession, offset: int = 0, limit: int = 100) -> list[User]:
+    query = select(User).offset(offset).limit(limit)
+    result = await session.execute(query)
+    return list(result.scalars().all())
 
 
 async def create_user(session: AsyncSession, user_create: UserCreate) -> User:

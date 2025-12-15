@@ -19,7 +19,7 @@ async def update_product(session: AsyncSession,
     for field, value in product_data.items():
         setattr(product_db, field, value)
     await session.commit()
-    return
+    return product_db
 
 
 async def get_product_by_id(session: AsyncSession,

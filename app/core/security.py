@@ -17,7 +17,7 @@ def get_password_hash(password: str) -> str:
 
 
 def verify_password(plain_password, hashed_password) -> bool:
-    return password_hash,verify_password(plain_password, hashed_password)
+    return password_hash.verify(plain_password, hashed_password)
 
 
 def create_access_token(data: dict, expires_delta: timedelta | None = None):

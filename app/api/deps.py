@@ -16,7 +16,7 @@ from app.models.user import User
 from app.repositories.users import get_user_by_username
 
 
-oauth2_scheme = OAuth2PasswordBearer(tokenUrl="/login/access-token")
+oauth2_scheme = OAuth2PasswordBearer(tokenUrl="/auth/access-token")
 
 
 # Функция-зависимость для генерации новой сессии
